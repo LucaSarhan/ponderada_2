@@ -67,7 +67,11 @@ ul {
 
 .task-list-container {
   flex-basis: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 
 .task-list-container h3 {
   text-align: center;
