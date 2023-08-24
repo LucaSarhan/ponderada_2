@@ -1,47 +1,66 @@
 // Import the required modules
 const express = require('express');
-const { createClient } = require('@supabase/supabase-js');
+const jwt = require('jsonwebtoken');
 
 // Create an instance of the Express app
 const app = express();
 
+const secretKey = 'SecretCode';
+
 app.use(express.json());
 app.use(express.static('public'))
+
+const users = [
+  { id: 1, username: 'teste', password: 'teste123' }
+];
+
+// Generate JWT token for a user
+function generateToken(user) {
+  return jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: '1h' });
+}
+
+// Login route
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find(u => u.username === username && u.password === password);
+
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+
+  const token = generateToken(user);
+  res.json({ token });
+});
+
+// Protected route
+app.get('/api/protected', authenticateToken, (req, res) => {
+  res.json({ message: `Welcome, ${req.user.username}! This is a protected route.` });
+});
+
+// Middleware to authenticate token
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.sendStatus(401);
+  }
+
+  jwt.verify(token, secretKey, (err, user) => {
+    if (err) {
+      return res.sendStatus(403);
+    }
+    req.user = user;
+    next();
+  });
+}
 
 // Set the port number for the server to listen on
 const port = 3000;
 
-const supabaseUrl = 'https://ifgssworcxftvdnuagpj.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmZ3Nzd29yY3hmdHZkbnVhZ3BqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MjI5MzgyOSwiZXhwIjoyMDA3ODY5ODI5fQ.1dzWWPfCEWshno86HcHgLyuHpcOUNeqlRrJgGrI9-Ls';
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-app.get('/', async (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/login.html');
 });
-
-async function createRecord() {
-  const { error } = await supabase
-  .from('Tasks')
-  .insert({name: 'taskName' })
-}
-
-// async function deleteTask(taskId) {
-//   try {
-//     const { data, error } = await supabase
-//       .from('Tasks')
-//       .delete()
-//       .eq('id', taskId);
-
-//     if (error) {
-//       console.error('Error deleting task:', error.message);
-//     } else {
-//       console.log('Task deleted successfully');
-//     }
-//   } catch (error) {
-//     console.error('Error deleting task:', error.message);
-//   }
-// }
-
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
