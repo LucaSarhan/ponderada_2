@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
   const loginForm = document.getElementById('loginForm');
   const usernameInput = document.getElementById('usernameInput');
   const passwordInput = document.getElementById('passwordInput');
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (response.ok) {
       const data = await response.json();
-      localStorage.setItem('token', data.token);
-      window.location.href = '/main.html'; // Redirect to a protected page
+      document.cookie = `token=${data.token}; path=/`; // Set token as cookie
+      window.location.href = '/main'; // Redirect to the protected page
     } else {
       alert('Invalid credentials. Please try again.');
     }

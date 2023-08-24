@@ -1,7 +1,7 @@
 // Import the required modules
 const express = require('express');
 const jwt = require('jsonwebtoken');
-
+const cookieParser = require('cookie-parser');
 // Create an instance of the Express app
 const app = express();
 
@@ -32,28 +32,37 @@ app.post('/login', (req, res) => {
   res.json({ token });
 });
 
+// Use cookie-parser middleware
+app.use(cookieParser());
+
 // Protected route
-app.get('/api/protected', authenticateToken, (req, res) => {
-  res.json({ message: `Welcome, ${req.user.username}! This is a protected route.` });
+app.get('/main', authenticateToken, (req, res) => {
+  res.sendFile(__dirname + '/public/main.html');
 });
 
 // Middleware to authenticate token
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  console.log('Checking authentication...');
+
+  const token = req.cookies.token;
 
   if (!token) {
-    return res.sendStatus(401);
+    console.log('No token found, redirecting to login.');
+    return res.redirect('/public/login');
   }
 
   jwt.verify(token, secretKey, (err, user) => {
     if (err) {
-      return res.sendStatus(403);
+      console.log('Token verification failed, redirecting to login.');
+      return res.redirect('/login');
     }
     req.user = user;
+    console.log('Authentication successful.');
     next();
   });
 }
+
+
 
 // Set the port number for the server to listen on
 const port = 3000;
