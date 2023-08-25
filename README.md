@@ -18,3 +18,4 @@
 
 ![image](https://github.com/LucaSarhan/ponderada_2/assets/99192966/339ad75e-d9f5-494a-9a84-ec39b9bd13f9)
 
+Decidir fazer a atividade dessa maneira porque 
