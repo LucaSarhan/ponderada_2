@@ -16,5 +16,15 @@ Tem a pasta principal chamada TO-DO-LIST-APP. Dentro dela tem outra pasta chamad
     - script.js
   - supbase.js
 
+  
+- root-folder
+  - sub-folder1
+    - file1.txt
+    - file2.txt
+  - sub-folder2
+    - sub-sub-folder1
+      - file3.txt
+  - file4.txt
+
 ![image](https://github.com/LucaSarhan/ponderada_2/assets/99192966/339ad75e-d9f5-494a-9a84-ec39b9bd13f9)
 
