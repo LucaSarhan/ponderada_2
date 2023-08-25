@@ -38,3 +38,6 @@ Ao tentar acessar rotas protegidas, o cliente deve incluir o token JWT nas solic
 Renovação do Token:
 Os tokens JWT geralmente têm um tempo de expiração definido. Quando o token estiver prestes a expirar, o cliente pode solicitar um novo token por meio de um processo de renovação. Isso garante que os usuários autenticados permaneçam conectados sem a necessidade de efetuar login repetidamente.
 Dessa forma posso garantir que apenas usuários autenticados e autorizados tenham acesso a minha aplicação.
+
+Agora explicando como minha aplicação funciona:
+O arquivo 'supabase.js' além de ser responsável pela autenticação do usuario faz a aplicação como um todo rodar atráve de node.
