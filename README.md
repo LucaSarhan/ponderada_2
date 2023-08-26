@@ -66,3 +66,39 @@ Integração Supabase:
 Supabase, um serviço de banco de dados em nuvem, é usado para gerenciar os dados de tarefas do aplicativo. O aplicativo se conecta ao Supabase usando uma URL e uma chave de API fornecidas. A função fetchData consulta o banco de dados Supabase para recuperar dados de tarefas, que são então usados ​​para preencher as listas "To-Do" e "Done" na UI. A função updateData atualiza o status de conclusão da tarefa no banco de dados, enquanto a função deleteData remove tarefas concluídas.
 
 Em essência, este aplicativo demonstra um ciclo completo: os usuários podem fazer login com segurança, gerenciar tarefas usando interações do lado do cliente e ter seus dados armazenados e recuperados de um banco de dados em nuvem via Supabase. Ele mostra a integração de várias tecnologias para criar uma aplicação web funcional e interativa.
+
+Infelizmente não conseguir fazer a parte do docker funcionar mas se tivesse funcionado estaria presente da seguinte maneira:
+
+Montaria um arquivo docker-compose.yml para fazer minha aplicação rodar dois containers, um meu banco de dados e outro com a aplicação funcional. O arquivo docker compose funcionaria da mesma forma que um dockerfile no sentido que você precisa explicitar como será montado sua aplicação e como rodar ele. Caso isso foi feito com sucessso vou anexar os comandos para fazer rodar corretamente abaixo
+
+Criação de imagem:
+
+```
+docker build .
+```
+
+Catalogar imagem no dockerhub:
+
+```
+docker tag 'sua-tag' 'nome-do-repositório'
+```
+
+Envio para o dockerhub:
+
+```
+docker push 'nome-do-repositório'
+```
+
+Disponibilidade no dockerhub:
+
+```
+docker pull 'nome-do-repositório'
+```
+
+Execução:
+
+```
+docker-compose up
+```
+
+
