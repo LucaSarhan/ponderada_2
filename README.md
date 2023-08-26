@@ -22,7 +22,7 @@
 
 A pasta public minha contem minha aplicação por completo, ou seja, todas as funcionalidades da aplicação estão la. A autenticação do usuario decidir fazer usando JWT está no arquivo 'supabase.js'. 
 
-Eu decidir usar o JWT porque é uma opção segura e confiável de autentcação que se enquadrou bem na minha solução. No arquivo 'supabase.js', implementei uma solução robusta de autenticação usando JSON Web Tokens (JWT), uma abordagem confiável e segura amplamente adotada para proteger o acesso às minhas rotas e recursos sensíveis. O JWT é uma estrutura que permite a criação de tokens de autenticação assinados digitalmente, contendo informações do usuário. Ele se encaixou perfeitamente na minha solução, permitindo-me validar e autorizar o acesso de usuários de forma eficaz. 
+Eu decidir usar o JWT porque é uma opção segura e confiável de autenticação que se enquadrou bem na minha solução. No arquivo 'supabase.js', implementei uma solução robusta de autenticação usando JSON Web Tokens (JWT), uma abordagem confiável e segura amplamente adotada para proteger o acesso às minhas rotas e recursos sensíveis. O JWT é uma estrutura que permite a criação de tokens de autenticação assinados digitalmente, contendo informações do usuário. Ele se encaixou perfeitamente na minha solução, permitindo-me validar e autorizar o acesso de usuários de forma eficaz. 
 
 Vou explicar como isso funciona: 
 
@@ -38,8 +38,6 @@ Ao tentar acessar rotas protegidas, o cliente deve incluir o token JWT nas solic
 Renovação do Token:
 Os tokens JWT geralmente têm um tempo de expiração definido. Quando o token estiver prestes a expirar, o cliente pode solicitar um novo token por meio de um processo de renovação. Isso garante que os usuários autenticados permaneçam conectados sem a necessidade de efetuar login repetidamente.
 Dessa forma posso garantir que apenas usuários autenticados e autorizados tenham acesso a minha aplicação.
-
-## Explicação de como minha aplicação funciona
 
 Código do lado do servidor:
 
